@@ -10,6 +10,15 @@ import LightingHelper from "./light_setup.js"
 import KeyboardHelpher from "./keyboard.js"
 import { createCrosshair } from "./crosshair.js";
 
+// Mesh Komponen
+// Sumber Mesh : https://polyhaven.com/
+import { kursi } from "./komponen/chair.js";
+import { rakBuku } from "./komponen/rakBuku.js";
+import { Meja } from "./komponen/meja.js";
+import { CCTV } from "./komponen/cctv.js";
+import { BED } from "./komponen/bed.js";
+import { MejaMakan } from "./komponen/mejaMakan.js";
+
 //scene= our 3d world
 //camera= camera ke 3d world untuk menghasilkan 2d 
 //renderer= menggambarkan hasil foto camera
@@ -56,6 +65,7 @@ const map_ao2=new THREE.TextureLoader().load("./texture/rock/Rock050_1K-JPG_Ambi
 // const mat = new THREE.MeshPhongMaterial({map: map_saya, normalMap: map_normal}); // warna merah
 // const mesh = new THREE.Mesh(geo, mat);// bikin bendanya
 // scene.add(mesh); // masukin boxnya ke dunia kita
+
 
 
 const texture1 = new THREE.TextureLoader().load('./texture/1.png');
@@ -310,7 +320,7 @@ for (let i=0;i<faceCount;i++) {
 }
 const mesh = new THREE.Mesh(geo, mat_array);
 scene.add(mesh);
-mesh.position.set(0,1.5,0)
+mesh.position.set(0,1.5,8)
 mesh.castShadow= true
 mesh.name = "dadu1"
 const plane = new PlaneMesh(scene);
@@ -320,7 +330,7 @@ const geo2 = new THREE.BoxGeometry(3,3,3);  // bikin geo2metry box ukuran 1x1x1
 const mat2 = new THREE.MeshPhongMaterial({map: map_saya, normalMap: map_normal, roughnessMap:map_rough, aoMap: map_ao}); // warna merah
 const mesh2 = new THREE.Mesh(geo2, mat2);// bikin bendanya
 scene.add(mesh2); // masukin boxnya ke dunia kita
-mesh2.position.set(5,1,0)
+mesh2.position.set(5,1,8)
 mesh2.castShadow= true
 mesh2.name = "dadu2"
 
@@ -328,7 +338,7 @@ const geo3 = new THREE.BoxGeometry(3,3,3);  // bikin geo3metry box ukuran 1x1x1
 const mat3 = new THREE.MeshPhongMaterial({map: map_saya2, normalMap: map_normal2, roughnessMap:map_rough2, aoMap: map_ao2}); // warna merah
 const mesh3 = new THREE.Mesh(geo3, mat3);// bikin bendanya
 scene.add(mesh3); // masukin boxnya ke dunia kita
-mesh3.position.set(-5,1,0)
+mesh3.position.set(-5,1,10)
 mesh3.castShadow= true
 mesh3.name = "dadu3"
 
@@ -458,6 +468,13 @@ const onKeyDown = function (event) {
 if(selected==undefined){
     document.addEventListener('keydown', onKeyDown, false)
 }
+
+kursi(scene);
+rakBuku(scene);
+Meja(scene);
+CCTV(scene);
+BED(scene);
+MejaMakan(scene);
 
 function draw() {
     if(selected!=undefined){
