@@ -10,14 +10,27 @@ import LightingHelper from "./light_setup.js"
 import KeyboardHelpher from "./keyboard.js"
 import { createCrosshair } from "./crosshair.js";
 
+
+// Background3D 360 HDRis Poly Haven : https://polyhaven.com/a/qwantani_sunset
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js"; //https://discourse.threejs.org/t/gltfloader-and-rgbeloader-adding-hdr-texture-to-enviroment/36086
+import { PMREMGenerator } from "three";
+
 // Mesh Komponen
 // Sumber Mesh : https://polyhaven.com/
 import { kursi } from "./komponen/chair.js";
-import { rakBuku } from "./komponen/rakBuku.js";
+import {  Bebek, Potted2, pasBunga, KotakMisteri, Kuda, Wine, Buku, rakBuku } from "./komponen/rakBuku.js";
 import { Meja } from "./komponen/meja.js";
 import { CCTV } from "./komponen/cctv.js";
 import { BED } from "./komponen/bed.js";
 import { MejaMakan } from "./komponen/mejaMakan.js";
+import { CeilingLamp } from "./komponen/CeilingLamp.js";
+import { Vase } from "./komponen/vase.js";
+import { VaseTable } from "./komponen/vaseTable.js";
+import { Potted } from "./komponen/potted.js";
+import { PictureWall } from "./komponen/foto.js";
+import { Alaram } from "./komponen/alaram.js";
+
+
 
 //scene= our 3d world
 //camera= camera ke 3d world untuk menghasilkan 2d 
@@ -39,6 +52,23 @@ renderer.shadowMap.enabled = true
 
 document.body.appendChild(renderer.domElement);// pasang canvas ke layar
 cam.position.set(0,10,18)
+
+
+
+// // Background3D 360 HDRis Poly Haven : https://polyhaven.com/a/qwantani_sunset
+// const pmremGenerator = new PMREMGenerator(renderer);
+
+// const loader = new RGBELoader(); // https://discourse.threejs.org/t/gltfloader-and-rgbeloader-adding-hdr-texture-to-enviroment/36086
+// loader.load('./mesh/background/qwantani_sunset_16k.hdr', (texture) => {
+//     const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+
+//     scene.environment = envMap;
+//     scene.background = envMap;
+
+//     texture.dispose();
+//     pmremGenerator.dispose();
+// });
+
 
 renderer.setClearColor(0xffffff);
 // const grid = new THREE.GridHelper(10,10,0xff0000,0x0000ff)
@@ -319,7 +349,7 @@ for (let i=0;i<faceCount;i++) {
   geo.addGroup(i*3,3,i); 
 }
 const mesh = new THREE.Mesh(geo, mat_array);
-scene.add(mesh);
+// scene.add(mesh);
 mesh.position.set(0,1.5,8)
 mesh.castShadow= true
 mesh.name = "dadu1"
@@ -329,7 +359,7 @@ plane.plane_mesh.position.y = -0.5;
 const geo2 = new THREE.BoxGeometry(3,3,3);  // bikin geo2metry box ukuran 1x1x1
 const mat2 = new THREE.MeshPhongMaterial({map: map_saya, normalMap: map_normal, roughnessMap:map_rough, aoMap: map_ao}); // warna merah
 const mesh2 = new THREE.Mesh(geo2, mat2);// bikin bendanya
-scene.add(mesh2); // masukin boxnya ke dunia kita
+// scene.add(mesh2); // masukin boxnya ke dunia kita
 mesh2.position.set(5,1,8)
 mesh2.castShadow= true
 mesh2.name = "dadu2"
@@ -337,7 +367,7 @@ mesh2.name = "dadu2"
 const geo3 = new THREE.BoxGeometry(3,3,3);  // bikin geo3metry box ukuran 1x1x1
 const mat3 = new THREE.MeshPhongMaterial({map: map_saya2, normalMap: map_normal2, roughnessMap:map_rough2, aoMap: map_ao2}); // warna merah
 const mesh3 = new THREE.Mesh(geo3, mat3);// bikin bendanya
-scene.add(mesh3); // masukin boxnya ke dunia kita
+// scene.add(mesh3); // masukin boxnya ke dunia kita
 mesh3.position.set(-5,1,10)
 mesh3.castShadow= true
 mesh3.name = "dadu3"
@@ -475,6 +505,19 @@ Meja(scene);
 CCTV(scene);
 BED(scene);
 MejaMakan(scene);
+CeilingLamp(scene);
+Vase(scene);
+VaseTable(scene);
+Potted(scene);
+PictureWall(scene);
+Alaram(scene);
+Buku(scene);
+Wine(scene);
+Kuda(scene);
+KotakMisteri(scene);
+pasBunga(scene);
+Potted2(scene);
+Bebek(scene);
 
 function draw() {
     if(selected!=undefined){
