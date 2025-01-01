@@ -3,7 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 export function rakBuku(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/rakBuku/wooden_display_shelves_01_8k.gltf', (gltf) => {
+    loader.load('./mesh/rakBuku/wooden_display_shelves_01_1k.gltf', (gltf) => {
         const rak_buku = gltf.scene;
         
         rak_buku.position.set(11.2, 0, -9.2);
@@ -19,7 +19,7 @@ export function rakBuku(scene) { // Sumber code referensi : https://threejs.org/
 export function Buku(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/rakBuku/book/book_encyclopedia_set_01_4k.gltf', (gltf) => {
+    loader.load('./mesh/rakBuku/book/book_encyclopedia_set_01_1k.gltf', (gltf) => {
         const buku = gltf.scene;
         
         buku.position.set(11, 7, -12.2);
@@ -36,7 +36,7 @@ export function Buku(scene) { // Sumber code referensi : https://threejs.org/doc
 export function Wine(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/rakBuku/wine/wine_bottles_01_4k.gltf', (gltf) => {
+    loader.load('./mesh/rakBuku/wine/wine_bottles_01_1k.gltf', (gltf) => {
         const wine = gltf.scene;
         
         wine.position.set(11, 4.8, -9.5);
@@ -53,7 +53,7 @@ export function Wine(scene) { // Sumber code referensi : https://threejs.org/doc
 export function Kuda(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/rakBuku/kuda/horse_statue_01_4k.gltf', (gltf) => {
+    loader.load('./mesh/rakBuku/kuda/horse_statue_01_1k.gltf', (gltf) => {
         const kuda = gltf.scene;
         
         kuda.position.set(11, 4.8, -11.3);
@@ -70,7 +70,7 @@ export function Kuda(scene) { // Sumber code referensi : https://threejs.org/doc
 export function KotakMisteri(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/rakBuku/kotak/treasure_chest_4k.gltf', (gltf) => {
+    loader.load('./mesh/rakBuku/kotak/treasure_chest_1k.gltf', (gltf) => {
         const kotak = gltf.scene;
         
         kotak.position.set(11, 2.7, -7.1);
@@ -87,7 +87,7 @@ export function KotakMisteri(scene) { // Sumber code referensi : https://threejs
 export function pasBunga(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/rakBuku/pot/ceramic_vase_01_4k.gltf', (gltf) => {
+    loader.load('./mesh/rakBuku/pot/ceramic_vase_01_1k.gltf', (gltf) => {
         const pas_bunga = gltf.scene;
         
         pas_bunga.position.set(11, 2.7, -9.2);
@@ -103,7 +103,7 @@ export function pasBunga(scene) { // Sumber code referensi : https://threejs.org
 export function Potted2(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/rakBuku/potted2/potted_plant_01_4k.gltf', (gltf) => {
+    loader.load('./mesh/rakBuku/potted2/potted_plant_01_1k.gltf', (gltf) => {
         const potted2 = gltf.scene;
         
         potted2.position.set(11, 2.7, -11.3);
@@ -119,7 +119,7 @@ export function Potted2(scene) { // Sumber code referensi : https://threejs.org/
 export function Bebek(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/rakBuku/bebek/rubber_duck_toy_4k.gltf', (gltf) => {
+    loader.load('./mesh/rakBuku/bebek/rubber_duck_toy_1k.gltf', (gltf) => {
         const bebek = gltf.scene;
         
         bebek.position.set(11, 7, -9.2);

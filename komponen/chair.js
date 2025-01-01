@@ -3,7 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 export function kursi(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/kursi/plastic_monobloc_chair_01_4k.gltf', (gltf) => {
+    loader.load('./mesh/kursi/plastic_monobloc_chair_01_1k.gltf', (gltf) => {
         const chair = gltf.scene;
         
         chair.position.set(5, 0, -1);
