@@ -20,7 +20,6 @@ import { PMREMGenerator } from "three";
 import { kursi } from "./komponen/chair.js";
 import {  Bebek, Potted2, pasBunga, KotakMisteri, Kuda, Wine, Buku, rakBuku } from "./komponen/rakBuku.js";
 import { Meja } from "./komponen/meja.js";
-import { CCTV } from "./komponen/cctv.js";
 import { BED } from "./komponen/bed.js";
 import { MejaMakan } from "./komponen/mejaMakan.js";
 import { CeilingLamp } from "./komponen/CeilingLamp.js";
@@ -29,6 +28,7 @@ import { VaseTable } from "./komponen/vaseTable.js";
 import { Potted } from "./komponen/potted.js";
 import { PictureWall } from "./komponen/foto.js";
 import { Alaram } from "./komponen/alaram.js";
+import { TV } from "./komponen/tv.js";
 
 
 
@@ -502,7 +502,6 @@ if(selected==undefined){
 kursi(scene);
 rakBuku(scene);
 Meja(scene);
-CCTV(scene);
 BED(scene);
 MejaMakan(scene);
 CeilingLamp(scene);
@@ -518,6 +517,7 @@ KotakMisteri(scene);
 pasBunga(scene);
 Potted2(scene);
 Bebek(scene);
+TV(scene);
 
 function draw() {
     if(selected!=undefined){

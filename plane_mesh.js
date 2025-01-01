@@ -23,7 +23,7 @@ export default class PlaneMesh{
 
 
         // Dinding Belakang
-        const back_texture = new THREE.TextureLoader().load("./mesh/dinding/back/textures/wood_cabinet_worn_long_diff_4k.jpg"); // Link : https://polyhaven.com/textures 
+        const back_texture = new THREE.TextureLoader().load("./mesh/dinding/painted_plaster_wall_diff_1k.jpg"); 
         back_texture.repeat.set(2, 2);
         back_texture.wrapS = THREE.RepeatWrapping;
         back_texture.wrapT = THREE.RepeatWrapping;
@@ -31,8 +31,8 @@ export default class PlaneMesh{
         const back_geo = new THREE.PlaneGeometry(25, 18);
         const back_material = new THREE.MeshStandardMaterial({
             map: back_texture,
-            roughness: 0.8,
-            metalness: 0.2,
+            roughness: 0.9, // https://threejs.org/docs/#api/en/materials/MeshStandardMaterial.roughness
+            metalness: 0.0, // https://threejs.org/docs/#api/en/materials/MeshStandardMaterial.metalness
             side: THREE.DoubleSide,
         });
         const wall_back = new THREE.Mesh(back_geo, back_material);
@@ -44,7 +44,7 @@ export default class PlaneMesh{
 
 
         // Dinding Kiri
-        const left_texture = new THREE.TextureLoader().load("./mesh/dinding/left/textures/grey_plaster_diff_4k.jpg") // Link : https://polyhaven.com/textures
+        const left_texture = new THREE.TextureLoader().load("./mesh/dinding/painted_plaster_wall_diff_1k.jpg") 
         left_texture.repeat.set(1,1);
         left_texture.wrapS - THREE.RepeatWrapping;
         left_texture.wrapT = THREE.RepeatWrapping;
@@ -52,8 +52,8 @@ export default class PlaneMesh{
         const left_geo = new THREE.PlaneGeometry(25, 18);
         const left_material = new THREE.MeshStandardMaterial({
             map: left_texture,
-            roughness: 0.8, //mentukan tampilan fisik dari 0.0 - 1.0
-            metalness: 0.2,
+            roughness: 0.9, // https://threejs.org/docs/#api/en/materials/MeshStandardMaterial.roughness
+            metalness: 0.0, // https://threejs.org/docs/#api/en/materials/MeshStandardMaterial.metalness
             side: THREE.DoubleSide,
         });
         const wall_left = new THREE.Mesh(left_geo, left_material);
@@ -65,7 +65,7 @@ export default class PlaneMesh{
 
         
         // Dinding Kanan
-        const right_texture = new THREE.TextureLoader().load("./mesh/dinding/left/textures/grey_plaster_diff_4k.jpg"); // Link : https://polyhaven.com/textures
+        const right_texture = new THREE.TextureLoader().load("./mesh/dinding/painted_plaster_wall_diff_1k.jpg"); 
         right_texture.repeat.set(2, 2);
         right_texture.wrapS = THREE.RepeatWrapping;
         right_texture.wrapT = THREE.RepeatWrapping;
@@ -73,8 +73,8 @@ export default class PlaneMesh{
         const right_geo = new THREE.PlaneGeometry(25, 18);
         const right_material = new THREE.MeshStandardMaterial({
             map: right_texture,
-            roughness: 0.7,
-            metalness: 0.2,
+            roughness: 0.9, // https://threejs.org/docs/#api/en/materials/MeshStandardMaterial.roughness
+            metalness: 0.0, // https://threejs.org/docs/#api/en/materials/MeshStandardMaterial.metalness
             side: THREE.DoubleSide,
         });
         const wall_right = new THREE.Mesh(right_geo, right_material);
@@ -86,7 +86,7 @@ export default class PlaneMesh{
 
 
         // Dinding Atas 
-        const ceiling_texture = new THREE.TextureLoader().load("./mesh/dinding/left/textures/grey_plaster_diff_4k.jpg"); // Link : https://polyhaven.com/textures
+        const ceiling_texture = new THREE.TextureLoader().load("./mesh/dinding/painted_plaster_wall_diff_1k.jpg");
         ceiling_texture.repeat.set(2, 2);
         ceiling_texture.wrapS = THREE.RepeatWrapping;
         ceiling_texture.wrapT = THREE.RepeatWrapping;
