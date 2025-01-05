@@ -1,5 +1,5 @@
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'; // https://threejs.org/docs/?q=objloader#examples/en/loaders/OBJLoader
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'; // https://threejs.org/docs/?q=mtl#examples/en/loaders/MTLLoader
 
 export function TV(scene) {
     const mtlLoader = new MTLLoader();
@@ -7,10 +7,10 @@ export function TV(scene) {
         materials.preload(); // Siapkan material
 
         const objLoader = new OBJLoader();
-        objLoader.setMaterials(materials); // pasang material ke OBJLoader
+        objLoader.setMaterials(materials); 
         objLoader.load('./mesh/tvObj/MI SMART TV.obj', (obj) => { // https://free3d.com/
             obj.position.set(10, 5, -1);
-            obj.scale.set(3, 3, 3);
+            obj.scale.set(2.8, 2.8, 2.8);
             obj.rotation.y = Math.PI / -2;
 
             scene.add(obj);

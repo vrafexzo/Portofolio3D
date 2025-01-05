@@ -3,7 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 export function Potted(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/potted/potted_plant_02_1k.gltf', (gltf) => {
+    loader.load('./mesh/potted/potted_plant_02_1k.gltf', (gltf) => { // https://polyhaven.com/
         const potted = gltf.scene;
         
         potted.position.set(-10.5, 0, 9);

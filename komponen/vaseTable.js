@@ -3,7 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 export function VaseTable(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/vaseTable/WoodenTable_02_1k.gltf', (gltf) => {
+    loader.load('./mesh/vaseTable/WoodenTable_02_1k.gltf', (gltf) => {  // https://polyhaven.com/
         const vase_table = gltf.scene;
         
         vase_table.position.set(11, 0, 7);

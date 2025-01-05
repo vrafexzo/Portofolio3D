@@ -3,7 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 export function Alaram(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/alaram/alarm_clock_01_1k.gltf', (gltf) => {
+    loader.load('./mesh/alaram/alarm_clock_01_1k.gltf', (gltf) => { // https://polyhaven.com/
         const alaram = gltf.scene;
         
         alaram.position.set(-11, 2.5, -2);

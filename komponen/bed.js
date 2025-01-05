@@ -3,7 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 export function BED(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/bed/GothicBed_01_1k.gltf', (gltf) => {
+    loader.load('./mesh/bed/GothicBed_01_1k.gltf', (gltf) => { // https://polyhaven.com/
         const bed = gltf.scene;
         
         bed.position.set(-7, 0, -8.5);

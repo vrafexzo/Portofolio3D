@@ -93,6 +93,7 @@ export default class PlaneMesh{
 
         const ceiling_geo = new THREE.PlaneGeometry(25, 25); 
         const ceiling_material = new THREE.MeshStandardMaterial({
+            color: 0xaaaaaa,
             map: ceiling_texture,
             roughness: 0.9, // https://threejs.org/docs/#api/en/materials/MeshStandardMaterial.roughness
             metalness: 0.0, // https://threejs.org/docs/#api/en/materials/MeshStandardMaterial.metalness
@@ -105,6 +106,27 @@ export default class PlaneMesh{
         wall_top.rotation.x = Math.PI / 2; 
         wall_top.receiveShadow = true;
         scene.add(wall_top);
+
+
+
+        // Dinding Depan
+        const front_texture = new THREE.TextureLoader().load("./mesh/dinding/painted_plaster_wall_diff_1k.jpg");
+        front_texture.repeat.set(2, 2);
+        front_texture.wrapS = THREE.RepeatWrapping;
+        front_texture.wrapT = THREE.RepeatWrapping;
+
+        const front_geo = new THREE.PlaneGeometry(25, 18);
+        const front_material = new THREE.MeshStandardMaterial({
+            map: front_texture,
+            roughness: 0.9, // Kekasaran material
+            metalness: 0.0, // Metalik material
+            side: THREE.DoubleSide, // Kedua sisi dapat terlihat
+        });
+        const wall_front = new THREE.Mesh(front_geo, front_material);
+        wall_front.position.set(0, 8.5, 12.5); // Atur posisi ke depan
+        wall_front.rotation.y = 0; // Tidak ada rotasi
+        wall_front.receiveShadow = true; // Dinding dapat menerima bayangan
+        scene.add(wall_front);
 
     }
 }

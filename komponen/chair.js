@@ -1,9 +1,10 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'; // https://threejs.org/docs/?q=objloader#examples/en/loaders/OBJLoader
 
 export function kursi(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/kursi/plastic_monobloc_chair_01_1k.gltf', (gltf) => {
+    loader.load('./mesh/kursi/plastic_monobloc_chair_01_1k.gltf', (gltf) => { // https://polyhaven.com/
         const chair = gltf.scene;
         
         chair.position.set(5, 0, -1);
@@ -15,3 +16,4 @@ export function kursi(scene) { // Sumber code referensi : https://threejs.org/do
         console.error("Gagal memasukkan kursi:", error);
     });
 }
+

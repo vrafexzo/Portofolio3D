@@ -19,7 +19,7 @@ import { PMREMGenerator } from "three";
 // Sumber Mesh : https://polyhaven.com/
 import { kursi } from "./komponen/chair.js";
 import {  Bebek, Potted2, pasBunga, KotakMisteri, Kuda, Wine, Buku, rakBuku } from "./komponen/rakBuku.js";
-import { Meja } from "./komponen/meja.js";
+import { Gelas, Keyboard, Meja, Mouse } from "./komponen/meja.js";
 import { BED } from "./komponen/bed.js";
 import { MejaMakan } from "./komponen/mejaMakan.js";
 import { CeilingLamp } from "./komponen/CeilingLamp.js";
@@ -51,7 +51,7 @@ renderer.shadowMap.type= THREE.BasicShadowMap
 renderer.shadowMap.enabled = true
 
 document.body.appendChild(renderer.domElement);// pasang canvas ke layar
-cam.position.set(0,10,18)
+cam.position.set(0,8,12)
 
 
 
@@ -379,26 +379,26 @@ window.addEventListener("resize", function() {
 });
 
 
-const myLighting = new LightingHelper(scene)
+// const myLighting = new LightingHelper(scene)
 const myKeyboard = new KeyboardHelpher(scene)
 
-let gui = new dat.GUI();
-myLighting.pointLight.position.set(0, 5, 0);
-myLighting.pointLight.intensity = 50
+// let gui = new dat.GUI();
+// myLighting.pointLight.position.set(0, 5, 0);
+// myLighting.pointLight.intensity = 50
 
 //https://sbcode.net/threejs/lights/
-const ambientFolder= gui.addFolder("AmbientLight");
-ambientFolder.addColor(myLighting.ambientLight, "color")
-ambientFolder.add(myLighting.ambientLight, "intensity", 0, 1).name("Intensity");
+// const ambientFolder= gui.addFolder("AmbientLight");
+// ambientFolder.addColor(myLighting.ambientLight, "color")
+// ambientFolder.add(myLighting.ambientLight, "intensity", 0, 1).name("Intensity");
 
-const pointFolder= gui.addFolder("PointLight");
-pointFolder.addColor(myLighting.pointLight,"color")
-pointFolder.add(myLighting.pointLight,"intensity",0,100).name("Intensity");
-pointFolder.add(myLighting.pointLight, 'distance', 0, 100, 0.01)
-pointFolder.add(myLighting.pointLight, 'decay', 0, 4, 0.1)
-pointFolder.add(myLighting.pointLight.position,"x",-10,10).name("X");
-pointFolder.add(myLighting.pointLight.position,"y",-10,10).name("Y");
-pointFolder.add(myLighting.pointLight.position,"z",-10,10).name("Z");
+// const pointFolder= gui.addFolder("PointLight");
+// pointFolder.addColor(myLighting.pointLight,"color")
+// pointFolder.add(myLighting.pointLight,"intensity",0,100).name("Intensity");
+// pointFolder.add(myLighting.pointLight, 'distance', 0, 100, 0.01)
+// pointFolder.add(myLighting.pointLight, 'decay', 0, 4, 0.1)
+// pointFolder.add(myLighting.pointLight.position,"x",-10,10).name("X");
+// pointFolder.add(myLighting.pointLight.position,"y",-10,10).name("Y");
+// pointFolder.add(myLighting.pointLight.position,"z",-10,10).name("Z");
 
 let raycast = new THREE.Raycaster();
 let mouse = {};
@@ -518,6 +518,9 @@ pasBunga(scene);
 Potted2(scene);
 Bebek(scene);
 TV(scene);
+Keyboard(scene);
+Mouse(scene);
+Gelas(scene);
 
 function draw() {
     if(selected!=undefined){
