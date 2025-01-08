@@ -6,7 +6,7 @@ export function VaseTable(scene) { // Sumber code referensi : https://threejs.or
     loader.load('./mesh/vaseTable/WoodenTable_02_1k.gltf', (gltf) => {  // https://polyhaven.com/
         const vase_table = gltf.scene;
         
-        vase_table.position.set(11, 0, 7);
+        vase_table.position.set(11, -0.5, 7);
         vase_table.scale.set(8, 8, 8);
         scene.add(vase_table);
 

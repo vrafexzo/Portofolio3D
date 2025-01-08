@@ -6,7 +6,7 @@ export function MejaMakan(scene) { // Sumber code referensi : https://threejs.or
     loader.load('./mesh/mejaMakan/round_wooden_table_01_2k.gltf', (gltf) => { // https://polyhaven.com/
         const mejaM = gltf.scene;
         
-        mejaM.position.set(-10.5, 0, -2);
+        mejaM.position.set(-10.5, -0.4, -2);
         mejaM.scale.set(2.5, 2.5, 2.5);
         scene.add(mejaM);
 

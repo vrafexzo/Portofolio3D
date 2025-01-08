@@ -6,7 +6,7 @@ export function BED(scene) { // Sumber code referensi : https://threejs.org/docs
     loader.load('./mesh/bed/GothicBed_01_1k.gltf', (gltf) => { // https://polyhaven.com/
         const bed = gltf.scene;
         
-        bed.position.set(-7, 0, -8.5);
+        bed.position.set(-7, -0.3, -8.5);
         bed.scale.set(5, 5, 5);
         bed.rotation.y = Math.PI / 2;
         scene.add(bed);

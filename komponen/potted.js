@@ -6,7 +6,7 @@ export function Potted(scene) { // Sumber code referensi : https://threejs.org/d
     loader.load('./mesh/potted/potted_plant_02_1k.gltf', (gltf) => { // https://polyhaven.com/
         const potted = gltf.scene;
         
-        potted.position.set(-10.5, 0, 9);
+        potted.position.set(-10.5, -0.5, 9);
         potted.scale.set(4, 4, 4);
         potted.rotation.y = Math.PI / 3;
         scene.add(potted);

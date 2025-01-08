@@ -8,7 +8,7 @@ export function Meja(scene) { // Sumber code referensi : https://threejs.org/doc
     loader.load('./mesh/meja/wooden_table_02_1k.gltf', (gltf) => { // https://polyhaven.com/
         const meja = gltf.scene;
         
-        meja.position.set(10.4, 0, -1);
+        meja.position.set(10.4, -1.1, -1);
         meja.scale.set(6, 6, 6);
         meja.rotation.y = Math.PI / 2;
 
@@ -27,7 +27,7 @@ export function Keyboard(scene) {
         const objLoader = new OBJLoader();
         objLoader.setMaterials(materials); 
         objLoader.load('./mesh/keyboardObj/lowprofilemechanicalkeyboard.obj', (obj) => { // https://free3d.com/
-            obj.position.set(9.5, 5, -1.5);
+            obj.position.set(9.5, 3.9, -1.5);
             obj.scale.set(0.04, 0.08, 0.04);
             obj.rotation.y = Math.PI / -2;
 
@@ -47,7 +47,7 @@ export function Mouse(scene) {
         const objLoader = new OBJLoader();
         objLoader.setMaterials(materials); 
         objLoader.load('./mesh/mouse/10106_Computer Mouse_v1_L3.obj', (obj) => { // https://free3d.com/
-            obj.position.set(9, 5, 1.5);
+            obj.position.set(9, 3.9, 1.5);
             obj.scale.set(0.05, 0.05, 0.05);
             obj.rotation.x = Math.PI / -2;
 

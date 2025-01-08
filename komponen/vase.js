@@ -6,7 +6,7 @@ export function Vase(scene) { // Sumber code referensi : https://threejs.org/doc
     loader.load('./mesh/vase/antique_ceramic_vase_01_1k.gltf', (gltf) => { // https://polyhaven.com/
         const vase = gltf.scene;
         
-        vase.position.set(11, 3, 7);
+        vase.position.set(11, 2.7, 7);
         vase.scale.set(7, 7, 7);
         scene.add(vase);
 
