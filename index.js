@@ -479,27 +479,31 @@ controls.addEventListener('unlock', () => {
 })
 
 const onKeyDown = function (event) {
-    switch (event.code) {
-      case 'KeyW':
-        controls.moveForward(0.25)
-        break
-      case 'KeyA':
-        controls.moveRight(-0.25)
-        break
-      case 'KeyS':
-        controls.moveForward(-0.25)
-        break
-      case 'KeyD':
-        controls.moveRight(0.25)
-        break
+    if(selected==undefined){
+        switch (event.code) {
+            case 'KeyW':
+                controls.moveForward(0.25)
+                break
+            case 'KeyA':
+                controls.moveRight(-0.25)
+                break
+            case 'KeyS':
+                controls.moveForward(-0.25)
+                break
+            case 'KeyD':
+                controls.moveRight(0.25)
+                break
+            }
     }
+        
 }
 
 if(selected==undefined){
     document.addEventListener('keydown', onKeyDown, false)
 }
 
-kursi(scene);
+const meshKursi = kursi(scene);
+
 rakBuku(scene);
 Meja(scene);
 BED(scene);

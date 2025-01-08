@@ -9,6 +9,7 @@ export function Alaram(scene) { // Sumber code referensi : https://threejs.org/d
         alaram.position.set(-11, 2.5, -2);
         alaram.scale.set(6.5, 6.5, 6.5);
         alaram.rotation.y = Math.PI / 3;
+        alaram.name = "alarm"
         scene.add(alaram);
 
         console.log("Alaram berhasil dimasukkan!");

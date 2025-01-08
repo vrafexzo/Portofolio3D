@@ -12,7 +12,7 @@ export function TV(scene) {
             obj.position.set(10, 5, -1);
             obj.scale.set(2.8, 2.8, 2.8);
             obj.rotation.y = Math.PI / -2;
-
+            obj.name='tv'
             scene.add(obj);
             console.log("TV berhasil dimuat dengan material.");
         });
