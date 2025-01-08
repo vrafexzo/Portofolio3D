@@ -7,7 +7,7 @@ export function CeilingLamp(scene) { // Sumber code referensi : https://threejs.
     loader.load('./mesh/ceilingLamp/modern_ceiling_lamp_01_1k.gltf', (gltf) => { // https://polyhaven.com/
         const lamp = gltf.scene;
         
-        lamp.position.set(0, 13.5, 0);
+        lamp.position.set(0, 14.60, 0);
         lamp.scale.set(2.5, 2.5, 2.5);
 
         const lampLight = new PointLight(0xffffff, 50, 50);

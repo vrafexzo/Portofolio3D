@@ -6,7 +6,7 @@ export function Alaram(scene) { // Sumber code referensi : https://threejs.org/d
     loader.load('./mesh/alaram/alarm_clock_01_1k.gltf', (gltf) => { // https://polyhaven.com/
         const alaram = gltf.scene;
         
-        alaram.position.set(-11, 2.5, -2);
+        alaram.position.set(-11, 2.1, -2);
         alaram.scale.set(6.5, 6.5, 6.5);
         alaram.rotation.y = Math.PI / 3;
         alaram.name = "alarm"

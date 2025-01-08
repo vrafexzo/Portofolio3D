@@ -9,7 +9,7 @@ export function TV(scene) {
         const objLoader = new OBJLoader();
         objLoader.setMaterials(materials); 
         objLoader.load('./mesh/tvObj/MI SMART TV.obj', (obj) => { // https://free3d.com/
-            obj.position.set(10, 5, -1);
+            obj.position.set(10, 3.7, -1);
             obj.scale.set(2.8, 2.8, 2.8);
             obj.rotation.y = Math.PI / -2;
             obj.name='tv'
