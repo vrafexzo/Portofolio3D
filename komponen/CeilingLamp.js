@@ -16,7 +16,7 @@ export function CeilingLamp(scene) { // Sumber code referensi : https://threejs.
         lamp.add(lampLight);
 
         const lampAmbient = new AmbientLight(0xffffff, 1);
-        lampAmbient.castShadow = true;
+        // lampAmbient.castShadow = true;
         lamp.add(lampAmbient);
 
         scene.add(lamp);

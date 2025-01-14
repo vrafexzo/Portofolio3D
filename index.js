@@ -1,5 +1,6 @@
 import * as THREE from "three"
 import * as dat from "dat.gui";
+import { physicsWorld } from './physics_world.js';
 import { OrbitControls } from "./node_modules/three/examples/jsm/controls/OrbitControls.js"
 import { FirstPersonControls } from "./node_modules/three/examples/jsm/controls/FirstPersonControls.js"
 import { PointerLockControls } from "./node_modules/three/examples/jsm/controls/PointerLockControls.js"
@@ -19,7 +20,7 @@ import { PMREMGenerator } from "three";
 // Sumber Mesh : https://polyhaven.com/
 import { kursi } from "./komponen/chair.js";
 import {  Bebek, Potted2, pasBunga, KotakMisteri, Kuda, Wine, Buku, rakBuku } from "./komponen/rakBuku.js";
-import { Gelas, Keyboard, Meja, Mouse } from "./komponen/meja.js";
+import { Keyboard, Meja, Mouse } from "./komponen/meja.js";
 import { BED } from "./komponen/bed.js";
 import { MejaMakan } from "./komponen/mejaMakan.js";
 import { CeilingLamp } from "./komponen/CeilingLamp.js";
@@ -43,6 +44,7 @@ const cam  =  new THREE.PerspectiveCamera(
     1, //jarak terdekat yang bisa diliat
     1000 // jarak terjauh yang bisa diliat
 );
+
 
 const renderer= new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(window.innerWidth, window.innerHeight);// ukuran canvas
@@ -416,14 +418,14 @@ addEventListener("mousedown",(e)=>{
     if (e.button === 0){
         items.forEach((i)=>{
             if(i.object.name != ""){
-                console.log(i.object.name)
+                // console.log(i.object.name)
                 selected=i.object
                 // controls.target=selected.position;
             }
         })
     }else if (e.button === 2) {
         selected = undefined;
-        console.log('Klik kanan ditekan');
+        // console.log('Klik kanan ditekan');
       }
     
 })
@@ -435,27 +437,40 @@ window.addEventListener("resize", ()=> {
 });
 
 function prosesKeyboard(){
-    const speed= 0.05
-    if((myKeyboard.keys['a'] || myKeyboard.keys['A']) && selected.position.x>=-12.5 && selected!=undefined){
+    const speed = 0.05;
+    if(!selected) return;
+    
+    let moved = false;
+
+    if((myKeyboard.keys['a'] || myKeyboard.keys['A']) && selected.position.x>=-12.5){
         selected.position.x-=speed;
-
-    }if((myKeyboard.keys['d'] || myKeyboard.keys['D']) && selected.position.x<=12.5 && selected!=undefined){
+        moved = true;
+    }
+    if((myKeyboard.keys['d'] || myKeyboard.keys['D']) && selected.position.x<=12.5){
         selected.position.x+=speed;
-
-    }if((myKeyboard.keys['w'] || myKeyboard.keys['W']) && selected.position.z>=-12.5 && selected!=undefined){
+        moved = true;
+    }
+    if((myKeyboard.keys['w'] || myKeyboard.keys['W']) && selected.position.z>=-12.5){
         selected.position.z-=speed;
-
-    }if((myKeyboard.keys['s'] || myKeyboard.keys['S'])  && selected.position.z<=12.5 && selected!=undefined){
+        moved = true;
+    }
+    if((myKeyboard.keys['s'] || myKeyboard.keys['S']) && selected.position.z<=12.5){
         selected.position.z+=speed;
-
-    }if((myKeyboard.keys['q'] || myKeyboard.keys['Q']) && selected.position.z>=-12.5 && selected!=undefined){
+        moved = true;
+    }
+    if((myKeyboard.keys['q'] || myKeyboard.keys['Q']) && selected.position.z>=-12.5){
         selected.rotation.y-=Math.PI/2;
-
-    }if((myKeyboard.keys['e'] || myKeyboard.keys['E'])  && selected.position.z<=12.5 && selected!=undefined){
+        moved = true;
+    }
+    if((myKeyboard.keys['e'] || myKeyboard.keys['E']) && selected.position.z<=12.5){
         selected.rotation.y+=Math.PI/2;
-
+        moved = true;
     }
 
+    // Update physics body if object was moved and has updatePhysics method
+    if (moved && selected.updatePhysics) {
+        selected.updatePhysics();
+    }
 }
 
 const controls = new PointerLockControls(cam, renderer.domElement);
@@ -478,29 +493,67 @@ controls.addEventListener('unlock', () => {
     menuPanel.style.display = 'block'
 })
 
-const onKeyDown = function (event) {
-    if(selected==undefined){
-        switch (event.code) {
-            case 'KeyW':
-                controls.moveForward(0.25)
-                break
-            case 'KeyA':
-                controls.moveRight(-0.25)
-                break
-            case 'KeyS':
-                controls.moveForward(-0.25)
-                break
-            case 'KeyD':
-                controls.moveRight(0.25)
-                break
-            }
-    }
-        
-}
 
-if(selected==undefined){
-    document.addEventListener('keydown', onKeyDown, false)
-}
+/**
+ References:
+ - Three.js PointerLockControls: https://threejs.org/docs/#examples/en/controls/PointerLockControls
+ - Three.js Vector3: https://threejs.org/docs/#api/en/math/Vector3
+ - Boundary discussion: https://discourse.threejs.org/t/how-to-limit-camera-movement/2179
+ */
+
+const BOUNDS = {
+    minX: -12,
+    maxX: 12,
+    minZ: -12,
+    maxZ: 12
+  };
+
+
+  const onKeyDown = function (event) {
+      if(selected == undefined) {
+          const moveDistance = 0.25;
+          let nextPosition = new THREE.Vector3();
+          
+          nextPosition.copy(cam.position);
+          
+          switch (event.code) {
+              case 'KeyW':
+                  controls.moveForward(moveDistance);
+                  if(cam.position.x < BOUNDS.minX || cam.position.x > BOUNDS.maxX ||
+                     cam.position.z < BOUNDS.minZ || cam.position.z > BOUNDS.maxZ) {
+                      cam.position.copy(nextPosition);
+                  }
+                  break;
+              case 'KeyS':
+                  controls.moveForward(-moveDistance);
+                  if(cam.position.x < BOUNDS.minX || cam.position.x > BOUNDS.maxX ||
+                     cam.position.z < BOUNDS.minZ || cam.position.z > BOUNDS.maxZ) {
+                      cam.position.copy(nextPosition);
+                  }
+                  break;
+              case 'KeyA':
+                  controls.moveRight(-moveDistance);
+                  if(cam.position.x < BOUNDS.minX || cam.position.x > BOUNDS.maxX ||
+                     cam.position.z < BOUNDS.minZ || cam.position.z > BOUNDS.maxZ) {
+                      cam.position.copy(nextPosition);
+                  }
+                  break;
+              case 'KeyD':
+                  controls.moveRight(moveDistance);
+                  if(cam.position.x < BOUNDS.minX || cam.position.x > BOUNDS.maxX ||
+                     cam.position.z < BOUNDS.minZ || cam.position.z > BOUNDS.maxZ) {
+                      cam.position.copy(nextPosition);
+                  }
+                  break;
+          }
+      }
+  };
+  
+  document.removeEventListener('keydown', onKeyDown);
+  
+  if(selected == undefined) {
+      document.addEventListener('keydown', onKeyDown, false);
+  }
 
 const meshKursi = kursi(scene);
 
@@ -524,15 +577,22 @@ Bebek(scene);
 TV(scene);
 Keyboard(scene);
 Mouse(scene);
-Gelas(scene);
+
+let lastTime = performance.now();
 
 function draw() {
-    if(selected!=undefined){
+    const time = performance.now();
+    const deltaTime = (time - lastTime) / 1000;
+    lastTime = time;
+
+    // Update physics
+    physicsWorld.update(deltaTime);
+
+    if(selected != undefined){
         prosesKeyboard();
-        
     }
     controls.update();
-    renderer.render(scene,cam);;
+    renderer.render(scene, cam);
     requestAnimationFrame(draw);
 }
 draw();
