@@ -1,80 +1,67 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'; // https://threejs.org/docs/?q=objloader#examples/en/loaders/OBJLoader
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'; // https://threejs.org/docs/?q=mtl#examples/en/loaders/MTLLoader
+import { physicsWorld } from '../physics_world.js';
+import * as THREE from "three"
 
-export function Meja(scene) { // Sumber code referensi : https://threejs.org/docs/?q=GLTFLoader#examples/en/loaders/GLTFLoader
+
+export function Meja(scene) {
     const loader = new GLTFLoader();
 
-    loader.load('./mesh/meja/wooden_table_02_1k.gltf', (gltf) => { // https://polyhaven.com/
+    loader.load('./mesh/meja/wooden_table_02_1k.gltf', (gltf) => {
         const meja = gltf.scene;
-        
-        meja.position.set(10.4, -1.1, -1);
-        meja.scale.set(6, 6, 6);
-        meja.rotation.y = Math.PI / 2;
 
+        // Posisi, skala, dan rotasi meja tetap sama
+        meja.position.set(10.4, -1.5, -1); 
+        meja.scale.set(6, 6, 6); 
+        meja.rotation.y = Math.PI / 2;
         scene.add(meja);
-        console.log("Meja berhasil dimasukkan!");
-    }, undefined, (error) => {
-        console.error("Gagal memasukkan Meja:", error);
+
+        // Yang perlu diubah adalah posisi bounding box
+        // Sesuaikan y (tinggi) agar sejajar dengan kaki meja
+        // Posisi bounding box sekarang mengacu pada bagian bawah meja
+        const position = new THREE.Vector3(10.4, 2.5, -1); // y diatur sesuai tinggi kaki meja
+        const size = new THREE.Vector3(6, 9.89, 6); // tinggi disesuaikan dengan tebal meja
+
+        physicsWorld.addStaticObject({
+            mesh: meja,
+            size,
+            center: position,
+        });
+
+        console.log("Meja berhasil dimasukkan ke dalam scene dengan bounding box yang disesuaikan.");
     });
 }
-
 export function Keyboard(scene) {
-    const mtlLoader = new MTLLoader();
-    mtlLoader.load('./mesh/keyboardObj/lowprofilemechanicalkeyboard.mtl', (materials) => { // https://free3d.com/
-        materials.preload(); // Siapkan material
+    const loader = new GLTFLoader();
 
-        const objLoader = new OBJLoader();
-        objLoader.setMaterials(materials); 
-        objLoader.load('./mesh/keyboardObj/lowprofilemechanicalkeyboard.obj', (obj) => { // https://free3d.com/
-            obj.position.set(9.5, 3.9, -1.5);
-            obj.scale.set(0.04, 0.08, 0.04);
-            obj.rotation.y = Math.PI / -2;
+    loader.load('./mesh/keyboardObj/Keyboard.gltf', (gltf) => {
+        const keyboard = gltf.scene;
 
-            scene.add(obj);
-            console.log("Keyboard berhasil dimuat.");
-        });
-    }, undefined, (error) => {
-        console.error('Gagal memuat mtl:', error);
+        keyboard.position.set(9.5, 4, -1.5);
+        keyboard.scale.set(0.04, 0.08, 0.04);
+        keyboard.rotation.y = Math.PI / -2;
+
+        scene.add(keyboard);
+
+        physicsWorld.addFurnitureBody(keyboard, 0.9);
+
+        console.log("Keyboard berhasil dimuat.");
     });
 }
 
 export function Mouse(scene) {
-    const mtlLoader = new MTLLoader();
-    mtlLoader.load('./mesh/mouse/10106_Computer Mouse_v1_L3.mtl', (materials) => { // https://free3d.com/
-        materials.preload(); // Siapkan material
+    const loader = new GLTFLoader();
 
-        const objLoader = new OBJLoader();
-        objLoader.setMaterials(materials); 
-        objLoader.load('./mesh/mouse/10106_Computer Mouse_v1_L3.obj', (obj) => { // https://free3d.com/
-            obj.position.set(9, 3.9, 1.5);
-            obj.scale.set(0.05, 0.05, 0.05);
-            obj.rotation.x = Math.PI / -2;
+    loader.load('./mesh/mouse/Mouse.gltf', (gltf) => {
+        const mouse = gltf.scene;
 
-            scene.add(obj);
-            console.log("Mouse berhasil dimuat.");
-        });
-    }, undefined, (error) => {
-        console.error('Gagal memuat mtl:', error);
+        mouse.position.set(9, 3.9, 1.5);
+        mouse.scale.set(0.05, 0.05, 0.05);
+        mouse.rotation.x = Math.PI / -2;
+
+        scene.add(mouse);
+
+        physicsWorld.addFurnitureBody(mouse, 0.5);
+
+        console.log("Mouse berhasil dimuat.");
     });
 }
-
-export function Gelas(scene) {
-    const mtlLoader = new MTLLoader();
-    mtlLoader.load('./mesh/gelas/Glass_of_Whiskey-Obj.mtl', (materials) => { // https://free3d.com/
-        materials.preload(); // Siapkan material
-
-        const objLoader = new OBJLoader();
-        objLoader.setMaterials(materials); 
-        objLoader.load('./mesh/gelas/Glass_of_Whiskey-Obj.obj', (obj) => { // https://free3d.com/
-            obj.position.set(9, 6, -4);
-            obj.scale.set(0.08, 0.08, 0.08);
-
-            scene.add(obj);
-            console.log("Gelas berhasil dimuat.");
-        });
-    }, undefined, (error) => {
-        console.error('Gagal memuat mtl:', error);
-    });
-}
-

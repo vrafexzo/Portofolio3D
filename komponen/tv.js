@@ -1,22 +1,27 @@
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'; // https://threejs.org/docs/?q=objloader#examples/en/loaders/OBJLoader
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'; // https://threejs.org/docs/?q=mtl#examples/en/loaders/MTLLoader
+import { GLTFLoader } from "/three/examples/jsm/loaders/GLTFLoader.js"; // https://threejs.org/docs/?q=gltf#examples/en/loaders/GLTFLoader
+import { physicsWorld } from '../physics_world.js';
+import { MaskPass } from "three/examples/jsm/Addons.js";
 
 export function TV(scene) {
-    const mtlLoader = new MTLLoader();
-    mtlLoader.load('./mesh/tvObj/MI SMART TV.mtl', (materials) => { // https://free3d.com/
-        materials.preload(); // Siapkan material
+    const loader = new GLTFLoader();
 
-        const objLoader = new OBJLoader();
-        objLoader.setMaterials(materials); 
-        objLoader.load('./mesh/tvObj/MI SMART TV.obj', (obj) => { // https://free3d.com/
-            obj.position.set(10, 3.7, -1);
-            obj.scale.set(2.8, 2.8, 2.8);
-            obj.rotation.y = Math.PI / -2;
-            obj.name='tv'
-            scene.add(obj);
-            console.log("TV berhasil dimuat dengan material.");
+    loader.load('./mesh/tvObj/TV.gltf', (gltf) => {
+        const tv = gltf.scene;
+
+        tv.position.set(10, 8.5, 0); // Posisi awal TV
+        tv.scale.set(1.6, 1.6, 1.6); // Skala TV
+        tv.rotation.y = Math.PI / -2; // Rotasi TV
+        tv.name = 'tv';
+        scene.add(tv);
+
+        physicsWorld.addFurnitureBody(tv, {
+            mass :60,
+            linearDamping : 0,
+            angularDamping : 0
         });
+
+        console.log("TV berhasil dimuat dengan GLTF dan fisika diterapkan.");
     }, undefined, (error) => {
-        console.error('Gagal memuat file .mtl:', error);
+        console.error('Gagal memuat file GLTF (.glb):', error);
     });
 }
